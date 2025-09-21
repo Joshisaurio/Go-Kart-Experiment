@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://bgyk3jiyawsft"]
+
+[ext_resource type="Script" uid="uid://0avmebi08smd" path="res://scripts/camera_3d.gd" id="1_iyx0m"]
+[ext_resource type="PackedScene" uid="uid://bg30r5otlhv7a" path="res://scenes/kart.tscn" id="2_bl13t"]
+[ext_resource type="Texture2D" uid="uid://dlgrsqwgod1ns" path="res://assets/icon.svg" id="4_74lek"]
+[ext_resource type="PackedScene" uid="uid://ckc5n2ixiwtns" path="res://scenes/trackhitbox.tscn" id="4_j5jx5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6uqi0"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_ppyta"]
+sky_material = SubResource("ProceduralSkyMaterial_6uqi0")
+
+[sub_resource type="Environment" id="Environment_ykrsh"]
+background_mode = 2
+sky = SubResource("Sky_ppyta")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_37kl0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8uh7m"]
+size = Vector3(1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uqi0"]
+albedo_texture = ExtResource("4_74lek")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_37kl0"]
+material = SubResource("StandardMaterial3D_6uqi0")
+size = Vector2(1, 1)
+
+[node name="Test" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ykrsh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 7.15867e-08, -1.59348e-07, 4.25636e-09, 0.901923, 0.431897, 1.74638e-07, -0.431897, 0.901923, -0.032, 0.803, 0.83)
+visible = false
+script = ExtResource("1_iyx0m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_37kl0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_8uh7m")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_37kl0")
+
+[node name="Kart" parent="." groups=["CameraFollow"] instance=ExtResource("2_bl13t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7249, 0.780915, -1.85095)
+
+[node name="track" parent="." instance=ExtResource("4_j5jx5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg30r5otlhv7a"]
+
+[ext_resource type="Script" uid="uid://dnb470i4acgwy" path="res://scripts/kart.gd" id="1_yjkmi"]
+[ext_resource type="PackedScene" uid="uid://blodbicucbuwh" path="res://assets/gokartbody.blend" id="2_cysvk"]
+[ext_resource type="PackedScene" uid="uid://ddk7rnrfcd4gv" path="res://scenes/wheel.tscn" id="3_cysvk"]
+[ext_resource type="PackedScene" uid="uid://bdq6qnf7kdrxt" path="res://assets/steering_wheel.blend" id="4_mkfhg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sjnk0"]
+size = Vector3(3.13218, 0.582111, 2.35864)
+
+[node name="Kart" type="CharacterBody3D"]
+script = ExtResource("1_yjkmi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.00146553, 0.0316608, -0.201695)
+shape = SubResource("BoxShape3D_sjnk0")
+
+[node name="kartbody" parent="." instance=ExtResource("2_cysvk")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="wheel" parent="." instance=ExtResource("3_cysvk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.795416, -0.0162932, 0.442599)
+
+[node name="wheel2" parent="." instance=ExtResource("3_cysvk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.795, -0.0162932, 0.443)
+
+[node name="wheel3" parent="." instance=ExtResource("3_cysvk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.795416, -0.0162932, -0.926156)
+
+[node name="wheel4" parent="." instance=ExtResource("3_cysvk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.795, -0.0162932, -0.925755)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 7.15867e-08, -1.59348e-07, 4.25636e-09, 0.901923, 0.431897, 1.74638e-07, -0.431897, 0.901923, -0.032, 2.3726, 3.15929)
+current = true
+
+[node name="steering_wheel" parent="." instance=ExtResource("4_mkfhg")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.584915, -0.345155)
